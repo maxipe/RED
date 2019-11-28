@@ -7,16 +7,21 @@ class EquipoDeConstruccion {
     Constructor constructor
 
     static constraints = {
-        directorDeObra nullable: false
-        proyectista nullable: false
-        constructor nullable: false
     }
 
     def obtenerMiembros() {
         Set miembros = []
 
-        [proyectista, directorDeObra, constructor].findAll().each { miembros.add(it.miembro) }
+        obtenerRoles().each { miembros.add(it.miembro) }
 
         miembros
+    }
+
+    def obtenerRoles() {
+        [proyectista, directorDeObra, constructor].findAll()
+    }
+
+    def equipoCompleto() {
+        obtenerRoles().size() == 3
     }
 }

@@ -55,7 +55,7 @@ class EquipoDeConstruccionSpec extends Specification implements DomainUnitTest<E
         equipoDeConstruccion.obtenerMiembros().containsAll(miembros)
     }
 
-    void "obtener 2 miembros por rol repetido"() {
+    void "obtener 2 miembros por miembro con 2 roles"() {
 
         when:
         [directorDeObra, proyectista].eachWithIndex {it, i ->
@@ -70,6 +70,47 @@ class EquipoDeConstruccionSpec extends Specification implements DomainUnitTest<E
         then:
         equipoDeConstruccion.obtenerMiembros().size() == 2
         equipoDeConstruccion.obtenerMiembros().containsAll([miembros[0], miembros[1]])
+    }
+
+    void "el equipo esta incompleto"() {
+
+        when:
+        directorDeObra.miembro = miembros[0]
+        equipoDeConstruccion.directorDeObra = directorDeObra
+
+        then:
+        !equipoDeConstruccion.equipoCompleto()
+    }
+
+    void "el equipo esta completo"() {
+
+        when:
+        [directorDeObra, proyectista, constructor].eachWithIndex {it, i ->
+            it.miembro = miembros.get(i)
+        }
+
+        equipoDeConstruccion.directorDeObra = directorDeObra
+        equipoDeConstruccion.proyectista = proyectista
+        equipoDeConstruccion.constructor = constructor
+
+        then:
+        equipoDeConstruccion.equipoCompleto()
+    }
+
+    void "el equipo esta completo con miembro con 2 roles"() {
+
+        when:
+        [directorDeObra, proyectista].eachWithIndex {it, i ->
+            it.miembro = miembros.get(i)
+        }
+        constructor.miembro = miembros[0]
+
+        equipoDeConstruccion.directorDeObra = directorDeObra
+        equipoDeConstruccion.proyectista = proyectista
+        equipoDeConstruccion.constructor = constructor
+
+        then:
+        equipoDeConstruccion.equipoCompleto()
     }
 
 }
