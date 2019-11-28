@@ -11,8 +11,4 @@ class CalidadSpec extends Specification implements DomainUnitTest<Calidad> {
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
-    }
 }

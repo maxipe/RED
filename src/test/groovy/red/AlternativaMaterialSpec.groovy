@@ -11,8 +11,4 @@ class AlternativaMaterialSpec extends Specification implements DomainUnitTest<Al
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
-    }
 }

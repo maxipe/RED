@@ -11,8 +11,4 @@ class DirectorDeObraSpec extends Specification implements DomainUnitTest<Directo
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
-    }
 }

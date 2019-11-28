@@ -11,8 +11,4 @@ class PresupuestoSpec extends Specification implements DomainUnitTest<Presupuest
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
-    }
 }

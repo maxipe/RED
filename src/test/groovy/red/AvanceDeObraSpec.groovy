@@ -11,8 +11,4 @@ class AvanceDeObraSpec extends Specification implements DomainUnitTest<AvanceDeO
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
-    }
 }

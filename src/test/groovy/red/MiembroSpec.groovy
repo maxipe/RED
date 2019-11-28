@@ -11,8 +11,4 @@ class MiembroSpec extends Specification implements DomainUnitTest<Miembro> {
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
-    }
 }

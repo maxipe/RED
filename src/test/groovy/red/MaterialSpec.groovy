@@ -11,8 +11,4 @@ class MaterialSpec extends Specification implements DomainUnitTest<Material> {
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
-    }
 }

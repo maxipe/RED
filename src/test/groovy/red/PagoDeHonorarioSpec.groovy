@@ -11,8 +11,4 @@ class PagoDeHonorarioSpec extends Specification implements DomainUnitTest<PagoDe
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
-    }
 }

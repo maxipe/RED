@@ -11,8 +11,4 @@ class TerrenoSpec extends Specification implements DomainUnitTest<Terreno> {
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
-    }
 }

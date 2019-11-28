@@ -11,8 +11,4 @@ class CantidadSpec extends Specification implements DomainUnitTest<Cantidad> {
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
-    }
 }

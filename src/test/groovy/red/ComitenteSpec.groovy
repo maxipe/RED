@@ -11,8 +11,4 @@ class ComitenteSpec extends Specification implements DomainUnitTest<Comitente> {
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
-    }
 }

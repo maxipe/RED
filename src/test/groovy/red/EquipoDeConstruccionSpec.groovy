@@ -11,8 +11,4 @@ class EquipoDeConstruccionSpec extends Specification implements DomainUnitTest<E
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
-    }
 }

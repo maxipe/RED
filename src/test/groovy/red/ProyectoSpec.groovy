@@ -11,8 +11,4 @@ class ProyectoSpec extends Specification implements DomainUnitTest<Proyecto> {
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
-    }
 }

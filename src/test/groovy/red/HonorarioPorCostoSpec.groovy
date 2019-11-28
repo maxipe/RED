@@ -11,8 +11,4 @@ class HonorarioPorCostoSpec extends Specification implements DomainUnitTest<Hono
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
-    }
 }

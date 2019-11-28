@@ -11,8 +11,4 @@ class AsignacionDeGastoSpec extends Specification implements DomainUnitTest<Asig
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
-    }
 }

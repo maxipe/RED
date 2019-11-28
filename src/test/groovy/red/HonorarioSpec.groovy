@@ -11,8 +11,4 @@ class HonorarioSpec extends Specification implements DomainUnitTest<Honorario> {
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
-    }
 }

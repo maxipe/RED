@@ -11,8 +11,4 @@ class RolSpec extends Specification implements DomainUnitTest<Rol> {
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
-    }
 }

@@ -11,8 +11,4 @@ class ProyectistaSpec extends Specification implements DomainUnitTest<Proyectist
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
-    }
 }

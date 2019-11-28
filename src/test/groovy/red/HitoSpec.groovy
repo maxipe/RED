@@ -11,8 +11,4 @@ class HitoSpec extends Specification implements DomainUnitTest<Hito> {
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
-    }
 }
