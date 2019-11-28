@@ -1,6 +1,6 @@
 package red
 
-class Constructor {
+class Constructor extends MiembroEquipoDeConstruccion {
 
     static constraints = {
     }

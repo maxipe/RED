@@ -1,6 +1,6 @@
 package red
 
-class Comitente {
+class Comitente extends Rol {
 
     static constraints = {
     }

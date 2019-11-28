@@ -1,6 +1,6 @@
 package red
 
-class Proyectista {
+class Proyectista extends ProfesionalHabilitado {
 
     static constraints = {
     }

@@ -1,7 +1,8 @@
 package red
 
-class ProfesionalHabilitado {
+class ProfesionalHabilitado extends MiembroEquipoDeConstruccion {
 
     static constraints = {
     }
+
 }

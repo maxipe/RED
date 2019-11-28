@@ -1,6 +1,6 @@
 package red
 
-class DirectorDeObra {
+class DirectorDeObra extends ProfesionalHabilitado {
 
     static constraints = {
     }
