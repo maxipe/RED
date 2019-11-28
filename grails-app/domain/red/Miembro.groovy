@@ -18,4 +18,8 @@ class Miembro {
         persona nullable: false
         desarrolloInmobiliario nullable: false
     }
+
+    def agregarRol(Rol rol) {
+        roles.contains(rol) ?: roles.add(rol)
+    }
 }

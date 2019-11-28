@@ -6,12 +6,23 @@ class Persona {
     String apellido
     String dni
 
-    Set desarrollosInmobiliarios = []
+    Set membresias = []
 
     static hasMany = [
-            desarrollosInmobiliarios: DesarrolloInmobiliario,
+            membresias: Miembro
     ]
 
+    DesarrolloInmobiliario crearDesarrolloInmobiliario() {
+        def desarrolloInmobiliario = new DesarrolloInmobiliario()
+
+        desarrolloInmobiliario.asignarComitente(this)
+
+        desarrolloInmobiliario
+    }
+
+    void agregarMembresia(Miembro miembro) {
+        membresias.contains(miembro) ?: membresias.add(miembro)
+    }
 
     static constraints = {
         nombre blank: false
