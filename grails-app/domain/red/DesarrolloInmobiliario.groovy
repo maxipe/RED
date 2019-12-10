@@ -12,6 +12,10 @@ class DesarrolloInmobiliario {
     Proyecto proyecto
     Terreno terreno
 
+    DesarrolloInmobiliario() {
+        equipoDeConstruccion = new EquipoDeConstruccion()
+    }
+
     static hasMany = [
             invitaciones: Invitacion
     ]

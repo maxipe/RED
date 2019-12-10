@@ -34,4 +34,13 @@ class PersonaSpec extends Specification implements DomainUnitTest<Persona> {
         then: "sigue habiendo una sola membresia"
         persona.membresias.size() == 1
     }
+
+    void "crear desarrollo inmoiliario"() {
+
+        when:
+        def desarrollo = persona.crearDesarrolloInmobiliario()
+
+        then:
+        desarrollo.comitente.miembro.persona == persona
+    }
 }

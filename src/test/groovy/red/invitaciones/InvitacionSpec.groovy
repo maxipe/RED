@@ -11,8 +11,4 @@ class InvitacionSpec extends Specification implements DomainUnitTest<Invitacion>
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
-    }
 }
