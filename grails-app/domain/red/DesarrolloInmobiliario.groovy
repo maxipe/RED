@@ -14,6 +14,7 @@ class DesarrolloInmobiliario {
 
     DesarrolloInmobiliario() {
         equipoDeConstruccion = new EquipoDeConstruccion()
+        proyecto = new Proyecto()
     }
 
     static hasMany = [
@@ -54,5 +55,15 @@ class DesarrolloInmobiliario {
         def miembro = miembros.find({ m -> m.persona == persona }) ?: new Miembro(persona: persona, desarrolloInmobiliario: this)
         persona.agregarMembresia(miembro)
         miembro
+    }
+
+    def crearTerreno(String direccion, BigDecimal superficie) {
+        if (terreno) throw new IllegalStateException("Ya existe un terreno.")
+
+        terreno = new Terreno(direccion: direccion, superficie: superficie)
+    }
+
+    void estaIniciado() {
+        terreno && comitente && equipoDeConstruccion && nombre
     }
 }

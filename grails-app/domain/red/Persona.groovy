@@ -12,8 +12,8 @@ class Persona {
             membresias: Miembro
     ]
 
-    DesarrolloInmobiliario crearDesarrolloInmobiliario() {
-        def desarrolloInmobiliario = new DesarrolloInmobiliario()
+    DesarrolloInmobiliario crearDesarrolloInmobiliario(String nombre) {
+        def desarrolloInmobiliario = new DesarrolloInmobiliario(nombre: nombre)
 
         desarrolloInmobiliario.asignarComitente(this)
 
