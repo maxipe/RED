@@ -1,12 +1,20 @@
 package red
 
+import red.invitaciones.Invitacion
+
 class DesarrolloInmobiliario {
+
+    Set invitaciones
 
     String nombre
     Comitente comitente
     EquipoDeConstruccion equipoDeConstruccion
     Proyecto proyecto
     Terreno terreno
+
+    static hasMany = [
+            invitaciones: Invitacion
+    ]
 
     static constraints = {
         nombre blank: false
