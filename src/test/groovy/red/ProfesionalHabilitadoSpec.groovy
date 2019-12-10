@@ -18,7 +18,7 @@ class ProfesionalHabilitadoSpec extends Specification implements DomainUnitTest<
     }
 
     void "cuando el costo total del proyecto es ARS 1.000.000 y el honorario del 6%"() {
-        proyecto.costoTotal = Money.parse("ARS 1000000")
+        proyecto.costoTotalEstimado = Money.parse("ARS 1000000")
         profesionalHabilitado.honorario = new HonorarioPorCosto(porcentaje: 0.06)
 
         expect: "el honorario es ARS 60.000"
@@ -26,7 +26,7 @@ class ProfesionalHabilitadoSpec extends Specification implements DomainUnitTest<
     }
 
     void "cuando el costo total del proyecto es USD 100.000 y el honorario del 4,5%"() {
-        proyecto.costoTotal = Money.parse("USD 100000")
+        proyecto.costoTotalEstimado = Money.parse("USD 100000")
         profesionalHabilitado.honorario = new HonorarioPorCosto(porcentaje: 0.045)
 
         expect: "el honorario es USD 4.500"

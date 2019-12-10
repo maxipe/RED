@@ -10,7 +10,7 @@ class HonorarioPorCosto extends Honorario {
 
     @Override
     Money calcular(Proyecto proyecto) {
-        proyecto.costoTotal.multipliedBy(porcentaje, RoundingMode.HALF_UP)
+        proyecto.costoTotalEstimado.multipliedBy(porcentaje, RoundingMode.HALF_UP)
     }
 
     static constraints = {

@@ -6,12 +6,12 @@ import org.joda.money.Money
 class Proyecto {
 
     BigDecimal superficieAConstruir
-    Money costoTotal
+    Money costoTotalEstimado
 
-    static embedded  =  ['costoTotal']
+    static embedded  =  ['costoTotalEstimado']
 
     static mapping = {
-        costoTotal type: MoneyUserType, column: 'COSTO_TOTAL'
+        costoTotalEstimado type: MoneyUserType, column: 'COSTO_TOTAL_ESTIMADO'
     }
 
     static constraints = {

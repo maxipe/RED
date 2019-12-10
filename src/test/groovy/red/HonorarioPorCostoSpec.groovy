@@ -16,7 +16,7 @@ class HonorarioPorCostoSpec extends Specification implements DomainUnitTest<Hono
         HonorarioPorCosto honorario = new HonorarioPorCosto(porcentaje: 0.03)
 
         expect: "el honorario es ARS 3"
-        honorario.calcular(new Proyecto(costoTotal: Money.parse("ARS 100"))) == Money.parse("ARS 3")
+        honorario.calcular(new Proyecto(costoTotalEstimado: Money.parse("ARS 100"))) == Money.parse("ARS 3")
     }
 
 }
