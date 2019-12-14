@@ -23,5 +23,4 @@ class DesarrolloInmobiliarioService {
         desarrolloInmobiliario
     }
 
-    def test() {true}
 }
