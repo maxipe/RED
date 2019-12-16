@@ -1,5 +1,6 @@
 package red
 
+import Enums.RolTipo
 import red.invitaciones.Invitacion
 
 class DesarrolloInmobiliario {
@@ -13,6 +14,7 @@ class DesarrolloInmobiliario {
     Terreno terreno
 
     DesarrolloInmobiliario() {
+        invitaciones = new HashSet()
         equipoDeConstruccion = new EquipoDeConstruccion()
         proyecto = new Proyecto()
     }
@@ -65,5 +67,12 @@ class DesarrolloInmobiliario {
 
     void estaIniciado() {
         terreno && comitente && equipoDeConstruccion && nombre
+    }
+
+    def invitar(Persona personaInvitada, RolTipo rolTipo) {
+        if (invitaciones.any {Invitacion i -> i.mismaPersonaRol(personaInvitada, rolTipo)} )
+            throw new IllegalArgumentException("Esa persona ya fue invitada a ese rol")
+
+        invitaciones.add(new Invitacion(this, personaInvitada, rolTipo))
     }
 }

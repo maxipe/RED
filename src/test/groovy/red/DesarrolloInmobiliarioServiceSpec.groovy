@@ -1,7 +1,9 @@
 package red
 
+import Enums.RolTipo
 import grails.testing.gorm.DomainUnitTest
 import grails.testing.services.ServiceUnitTest
+import red.invitaciones.Invitacion
 import spock.lang.Specification
 
 class DesarrolloInmobiliarioServiceSpec extends Specification
@@ -10,9 +12,11 @@ class DesarrolloInmobiliarioServiceSpec extends Specification
     BigDecimal superficie = 180
     def direccion = "Av Siempreviva 742"
     def nombre = "Casa nueva"
+    def rolTipoProyectista = RolTipo.PROYECTISTA
+    def persona
 
     def setup() {
-        new Persona(nombre: "Juan", apellido: "Perez", dni: "36321123").save(flush: true)
+        persona = new Persona(nombre: "Juan", apellido: "Perez", dni: "36321123").save(flush: true)
     }
 
     def cleanup() {
@@ -42,14 +46,24 @@ class DesarrolloInmobiliarioServiceSpec extends Specification
     void "Actualizar datos terreno"() {
 
         when:
-        service.crearProyecto(nombre, 1, superficie, direccion).save(flush: true)
+        service.crearProyecto(nombre, 1, superficie, direccion)
         BigDecimal nuevaSuperficie = 181
-        service.actualizarDatosTerreno(1, nuevaSuperficie, direccion).save(flush: true)
+        service.actualizarDatosTerreno(1, nuevaSuperficie, direccion)
         def desarrolloInmobiliario = DesarrolloInmobiliario.get(1)
 
         then:
         desarrolloInmobiliario.terreno.superficie == nuevaSuperficie
         desarrolloInmobiliario.estaIniciado()
 
+    }
+
+    void "Invitar persona al equipo"() {
+
+        when:
+        service.crearProyecto(nombre, 1, superficie, direccion)
+        service.realizarInvitacion(1, 1, rolTipoProyectista)
+
+        then:
+        DesarrolloInmobiliario.get(1).invitaciones.any { i -> i.mismaPersonaRol(persona, rolTipoProyectista) }
     }
 }
