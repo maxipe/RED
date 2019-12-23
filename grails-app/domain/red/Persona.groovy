@@ -12,6 +12,10 @@ class Persona {
             membresias: Miembro
     ]
 
+    static mapping = {
+        membresias cascade: 'none'
+    }
+
     DesarrolloInmobiliario crearDesarrolloInmobiliario(String nombre) {
         def desarrolloInmobiliario = new DesarrolloInmobiliario(nombre: nombre)
 

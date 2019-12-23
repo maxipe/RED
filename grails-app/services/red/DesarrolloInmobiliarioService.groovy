@@ -2,6 +2,7 @@ package red
 
 import Enums.RolTipo
 import grails.gorm.transactions.Transactional
+import org.joda.money.Money
 import red.invitaciones.Invitacion
 
 @Transactional
@@ -12,6 +13,8 @@ class DesarrolloInmobiliarioService {
         def desarrolloInmobiliario = persona.crearDesarrolloInmobiliario(nombre)
         desarrolloInmobiliario.crearTerreno(dirreccion, superficieTerreno)
 
+        desarrolloInmobiliario.comitente.miembro.save()
+        desarrolloInmobiliario.comitente.save()
         desarrolloInmobiliario.save()
     }
 
@@ -30,6 +33,13 @@ class DesarrolloInmobiliarioService {
         def personaInvitada = Persona.get(personaInvitadaId)
 
         desarrolloInmobiliario.invitar(personaInvitada, rolTipo)
+        desarrolloInmobiliario.save()
+    }
+
+    def presentarPresupuestoHonorario(int invitacionId, Honorario honorario) {
+        def invitacion = Invitacion.get(invitacionId)
+
+        invitacion.presupuestoHonorario = honorario
     }
 
 }

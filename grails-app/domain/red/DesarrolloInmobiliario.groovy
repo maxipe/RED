@@ -19,8 +19,16 @@ class DesarrolloInmobiliario {
         proyecto = new Proyecto()
     }
 
+    static mapping = {
+        comitente cascade: 'save-update'
+    }
+
     static hasMany = [
             invitaciones: Invitacion
+    ]
+
+    static hasOne = [
+            comitente: Comitente
     ]
 
     static constraints = {
@@ -47,6 +55,7 @@ class DesarrolloInmobiliario {
 
         comitente = new Comitente(miembro: miembro)
 
+        comitente.desarrolloInmobiliario = this
         miembro.agregarRol(comitente)
     }
 
@@ -73,6 +82,9 @@ class DesarrolloInmobiliario {
         if (invitaciones.any {Invitacion i -> i.mismaPersonaRol(personaInvitada, rolTipo)} )
             throw new IllegalArgumentException("Esa persona ya fue invitada a ese rol")
 
-        invitaciones.add(new Invitacion(this, personaInvitada, rolTipo))
+        def invitacion = new Invitacion(this, personaInvitada, rolTipo)
+        invitaciones.add(invitacion)
+
+        invitacion
     }
 }

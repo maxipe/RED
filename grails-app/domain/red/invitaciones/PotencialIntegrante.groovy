@@ -16,4 +16,6 @@ class PotencialIntegrante {
     static constraints = {
         persona nullable: false
     }
+
+    static belongsTo = [Invitacion]
 }

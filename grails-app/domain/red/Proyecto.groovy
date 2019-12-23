@@ -15,5 +15,7 @@ class Proyecto {
     }
 
     static constraints = {
+        superficieAConstruir nullable: true
+        costoTotalEstimado nullable: true
     }
 }
