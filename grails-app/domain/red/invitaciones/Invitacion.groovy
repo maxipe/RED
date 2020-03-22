@@ -2,6 +2,7 @@ package red.invitaciones
 
 import Enums.RolTipo
 import red.DesarrolloInmobiliario
+import red.Honorario
 import red.Persona
 
 import java.time.LocalDateTime
@@ -11,6 +12,7 @@ class Invitacion {
     LocalDateTime fechaHoraInvitacion
     DesarrolloInmobiliario desarrolloInmobiliario
     PotencialIntegrante potencialIntegrante
+    Honorario presupuestoHonorario
 
     Invitacion(DesarrolloInmobiliario desarrolloInmobiliario, Persona personaInvitada, RolTipo rolTipo) {
         fechaHoraInvitacion = LocalDateTime.now()
@@ -26,5 +28,12 @@ class Invitacion {
         fechaHoraInvitacion nullable: false
         desarrolloInmobiliario nullable: false
         potencialIntegrante nullable: false
+        presupuestoHonorario nullable: true
+    }
+
+    static belongsTo = [desarrolloInmobiliario: DesarrolloInmobiliario]
+
+    static mapping = {
+        presupuestoHonorario cascade: 'save-update'
     }
 }

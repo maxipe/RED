@@ -17,5 +17,8 @@ class Terreno {
 
     static constraints = {
         direccion blank: false
+        costo nullable: true
     }
+
+    static belongsTo = [DesarrolloInmobiliario]
 }

@@ -5,7 +5,7 @@ import red.invitaciones.Invitacion
 
 class DesarrolloInmobiliario {
 
-    Set invitaciones
+    Set<Invitacion> invitaciones
 
     String nombre
     Comitente comitente
@@ -19,8 +19,16 @@ class DesarrolloInmobiliario {
         proyecto = new Proyecto()
     }
 
+    static mapping = {
+        comitente cascade: 'save-update'
+    }
+
     static hasMany = [
             invitaciones: Invitacion
+    ]
+
+    static hasOne = [
+            comitente: Comitente
     ]
 
     static constraints = {
@@ -32,7 +40,7 @@ class DesarrolloInmobiliario {
     }
 
     def obtenerMiembros() {
-        Set miembros = []
+        Set<Miembro> miembros = []
 
         if (comitente)
             miembros.add(comitente.miembro)
@@ -47,14 +55,12 @@ class DesarrolloInmobiliario {
 
         comitente = new Comitente(miembro: miembro)
 
+        comitente.desarrolloInmobiliario = this
         miembro.agregarRol(comitente)
     }
 
     private Miembro asignarMiembro(Persona persona) {
-        // TODO: Resolver duda: Sin list no puedo hacer m.persona en el find.. Porque?
-        List<Miembro> miembros = obtenerMiembros().asList()
-
-        def miembro = miembros.find({ m -> m.persona == persona }) ?: new Miembro(persona: persona, desarrolloInmobiliario: this)
+        def miembro = obtenerMiembros().find({ m -> m.persona == persona }) ?: new Miembro(persona: persona, desarrolloInmobiliario: this)
         persona.agregarMembresia(miembro)
         miembro
     }
@@ -73,6 +79,9 @@ class DesarrolloInmobiliario {
         if (invitaciones.any {Invitacion i -> i.mismaPersonaRol(personaInvitada, rolTipo)} )
             throw new IllegalArgumentException("Esa persona ya fue invitada a ese rol")
 
-        invitaciones.add(new Invitacion(this, personaInvitada, rolTipo))
+        def invitacion = new Invitacion(this, personaInvitada, rolTipo)
+        invitaciones.add(invitacion)
+
+        invitacion
     }
 }

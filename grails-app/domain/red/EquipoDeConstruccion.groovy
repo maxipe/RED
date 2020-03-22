@@ -7,6 +7,9 @@ class EquipoDeConstruccion {
     Constructor constructor
 
     static constraints = {
+        directorDeObra nullable: true
+        proyectista nullable: true
+        constructor nullable: true
     }
 
     def obtenerMiembros() {
