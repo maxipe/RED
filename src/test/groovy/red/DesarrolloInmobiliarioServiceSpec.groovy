@@ -2,7 +2,6 @@ package red
 
 import Enums.RolTipo
 import grails.testing.gorm.DataTest
-import grails.testing.gorm.DomainUnitTest
 import grails.testing.services.ServiceUnitTest
 import org.joda.money.Money
 import red.invitaciones.Invitacion

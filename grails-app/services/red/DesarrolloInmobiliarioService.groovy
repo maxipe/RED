@@ -2,16 +2,15 @@ package red
 
 import Enums.RolTipo
 import grails.gorm.transactions.Transactional
-import org.joda.money.Money
 import red.invitaciones.Invitacion
 
 @Transactional
 class DesarrolloInmobiliarioService {
 
-    def crearProyecto(String nombre, int personaId, BigDecimal superficieTerreno, String dirreccion) {
+    def crearProyecto(String nombre, int personaId, BigDecimal superficieTerreno, String direccion) {
         def persona = Persona.get(personaId)
         def desarrolloInmobiliario = persona.crearDesarrolloInmobiliario(nombre)
-        desarrolloInmobiliario.crearTerreno(dirreccion, superficieTerreno)
+        desarrolloInmobiliario.crearTerreno(direccion, superficieTerreno)
 
         desarrolloInmobiliario.comitente.miembro.save()
         desarrolloInmobiliario.comitente.save()

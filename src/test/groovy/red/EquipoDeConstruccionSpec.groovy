@@ -1,7 +1,10 @@
 package red
 
+import Enums.RolTipo
 import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
+
+import java.security.InvalidParameterException
 
 class EquipoDeConstruccionSpec extends Specification implements DomainUnitTest<EquipoDeConstruccion> {
 
@@ -113,4 +116,60 @@ class EquipoDeConstruccionSpec extends Specification implements DomainUnitTest<E
         equipoDeConstruccion.equipoCompleto()
     }
 
+    void "al agregar un director de obra al equipo de construcción se agrega su rol"() {
+
+        when:
+        Miembro miembro = new Miembro()
+        RolTipo rolTipo = RolTipo.DIRECTOR_DE_OBRA
+        def rol = equipoDeConstruccion.agregarRol(miembro, rolTipo)
+
+        then:
+        equipoDeConstruccion.directorDeObra == rol
+        !equipoDeConstruccion.rolDisponible(RolTipo.DIRECTOR_DE_OBRA)
+        equipoDeConstruccion.rolDisponible(RolTipo.PROYECTISTA)
+        equipoDeConstruccion.rolDisponible(RolTipo.CONSTRUCTOR)
+    }
+
+    void "al agregar un proyectista al equipo de construcción se agrega su rol"() {
+
+        when:
+        Miembro miembro = new Miembro()
+        RolTipo rolTipo = RolTipo.PROYECTISTA
+        def rol = equipoDeConstruccion.agregarRol(miembro, rolTipo)
+
+        then:
+        equipoDeConstruccion.proyectista == rol
+        equipoDeConstruccion.rolDisponible(RolTipo.DIRECTOR_DE_OBRA)
+        !equipoDeConstruccion.rolDisponible(RolTipo.PROYECTISTA)
+        equipoDeConstruccion.rolDisponible(RolTipo.CONSTRUCTOR)
+    }
+
+    void "al agregar un constructor al equipo de construcción se agrega su rol"() {
+
+        when:
+        Miembro miembro = new Miembro()
+        RolTipo rolTipo = RolTipo.CONSTRUCTOR
+        def rol = equipoDeConstruccion.agregarRol(miembro, rolTipo)
+
+        then:
+        equipoDeConstruccion.constructor == rol
+        equipoDeConstruccion.rolDisponible(RolTipo.DIRECTOR_DE_OBRA)
+        equipoDeConstruccion.rolDisponible(RolTipo.PROYECTISTA)
+        !equipoDeConstruccion.rolDisponible(RolTipo.CONSTRUCTOR)
+    }
+
+
+    void "al intentar agregar un comitente al equipo de construcción obtenemos un error"() {
+
+        when:
+        Miembro miembro = new Miembro()
+        RolTipo rolTipo = RolTipo.COMITENTE
+        equipoDeConstruccion.agregarRol(miembro, rolTipo)
+
+        then:
+        thrown(InvalidParameterException)
+        equipoDeConstruccion.rolDisponible(RolTipo.DIRECTOR_DE_OBRA)
+        equipoDeConstruccion.rolDisponible(RolTipo.PROYECTISTA)
+        equipoDeConstruccion.rolDisponible(RolTipo.CONSTRUCTOR)
+    }
 }

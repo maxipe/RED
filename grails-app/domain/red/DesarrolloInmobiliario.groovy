@@ -2,6 +2,9 @@ package red
 
 import Enums.RolTipo
 import red.invitaciones.Invitacion
+import red.invitaciones.PotencialIntegrante
+
+import java.security.InvalidParameterException
 
 class DesarrolloInmobiliario {
 
@@ -59,6 +62,22 @@ class DesarrolloInmobiliario {
         miembro.agregarRol(comitente)
     }
 
+    def aceptarPresupuestoDePotencialIntegrante(PotencialIntegrante potencialIntegrante) {
+        Persona persona = potencialIntegrante.persona
+        RolTipo rolTipo = potencialIntegrante.rolTipo
+
+        if (!equipoDeConstruccion.rolDisponible(rolTipo))
+            throw new InvalidParameterException("Ese rol ya está ocupado.")
+
+        Miembro miembro = asignarMiembro(persona)
+
+        def miembroEquipoDeConstruccion = equipoDeConstruccion.agregarRol(miembro, rolTipo)
+        miembroEquipoDeConstruccion.miembro = miembro
+
+        miembroEquipoDeConstruccion.desarrolloInmobiliario = this
+        miembro.agregarRol(miembroEquipoDeConstruccion)
+    }
+
     private Miembro asignarMiembro(Persona persona) {
         def miembro = obtenerMiembros().find({ m -> m.persona == persona }) ?: new Miembro(persona: persona, desarrolloInmobiliario: this)
         persona.agregarMembresia(miembro)
@@ -71,7 +90,7 @@ class DesarrolloInmobiliario {
         terreno = new Terreno(direccion: direccion, superficie: superficie)
     }
 
-    void estaIniciado() {
+    def estaIniciado() {
         terreno && comitente && equipoDeConstruccion && nombre
     }
 

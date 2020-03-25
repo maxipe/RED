@@ -22,6 +22,6 @@ class RolFactory {
 
     static Rol obtenerRol(RolTipo rolTipo)
     {
-        equivalencias[rolTipo]
+        equivalencias[rolTipo].newInstance()
     }
 }

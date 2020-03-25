@@ -1,13 +1,18 @@
 package red
 
+import Enums.RolTipo
 import grails.testing.gorm.DomainUnitTest
+import red.invitaciones.PotencialIntegrante
 import spock.lang.Specification
 
 class DesarrolloInmobiliarioSpec extends Specification implements DomainUnitTest<DesarrolloInmobiliario> {
 
     DesarrolloInmobiliario desarrolloInmobiliario
+    PotencialIntegrante potencialIntegrante
+
     def setup() {
         desarrolloInmobiliario = new DesarrolloInmobiliario()
+        potencialIntegrante = new PotencialIntegrante(persona: new Persona(), rolTipo: RolTipo.DIRECTOR_DE_OBRA)
     }
 
     def cleanup() {
@@ -30,6 +35,14 @@ class DesarrolloInmobiliarioSpec extends Specification implements DomainUnitTest
 
         then:
         thrown(IllegalStateException)
+    }
 
+    void "asignar un miembro al equipo de construccion"() {
+
+        when:
+        desarrolloInmobiliario.aceptarPresupuestoDePotencialIntegrante(potencialIntegrante)
+
+        then:
+        desarrolloInmobiliario.equipoDeConstruccion.directorDeObra.miembro.persona == potencialIntegrante.persona
     }
 }

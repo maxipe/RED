@@ -13,6 +13,9 @@ class Invitacion {
     DesarrolloInmobiliario desarrolloInmobiliario
     PotencialIntegrante potencialIntegrante
     Honorario presupuestoHonorario
+    boolean aceptada
+    boolean cerrada
+    LocalDateTime fechaHoraCierre
 
     Invitacion(DesarrolloInmobiliario desarrolloInmobiliario, Persona personaInvitada, RolTipo rolTipo) {
         fechaHoraInvitacion = LocalDateTime.now()
@@ -24,8 +27,19 @@ class Invitacion {
         return potencialIntegrante.persona == persona && potencialIntegrante.rolTipo == rolTipo
     }
 
+    def listaParaAceptar() {
+        desarrolloInmobiliario && potencialIntegrante && presupuestoHonorario
+    }
+
+    def aceptar() {
+        aceptada = true
+        cerrada = true
+        fechaHoraCierre = LocalDateTime.now()
+    }
+
     static constraints = {
         fechaHoraInvitacion nullable: false
+        fechaHoraCierre nullable: true
         desarrolloInmobiliario nullable: false
         potencialIntegrante nullable: false
         presupuestoHonorario nullable: true
