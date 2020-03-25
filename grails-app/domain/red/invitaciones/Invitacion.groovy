@@ -28,13 +28,34 @@ class Invitacion {
     }
 
     def listaParaAceptar() {
-        desarrolloInmobiliario && potencialIntegrante && presupuestoHonorario
+        desarrolloInmobiliario && potencialIntegrante && presupuestoHonorario && estaAbierta()
     }
 
     def aceptar() {
         aceptada = true
+        cerrar()
+    }
+
+    def rechazar() {
+        aceptada = false
+        cerrar()
+    }
+
+    private def cerrar() {
         cerrada = true
         fechaHoraCierre = LocalDateTime.now()
+    }
+
+    def estaAbierta() {
+        !cerrada
+    }
+
+    def estaAceptada() {
+        cerrada && aceptada
+    }
+
+    def estaRechazada() {
+        cerrada && !aceptada
     }
 
     static constraints = {

@@ -25,8 +25,8 @@ class DesarrolloInmobiliarioServiceSpec extends Specification
 
     def setup() {
         persona = new Persona(nombre: "Juan", apellido: "Perez", dni: "36321123").save(flush: true)
-        honorarioPorSuperficie = new HonorarioPorSuperficie(valorSuperficie: Money.parse("ARS 1500"))//.save(flush: true)
-        honorarioPorCosto = new HonorarioPorCosto(porcentaje: 0.07)//.save(flush: true)
+        honorarioPorSuperficie = new HonorarioPorSuperficie(valorSuperficie: Money.parse("ARS 1500"))
+        honorarioPorCosto = new HonorarioPorCosto(porcentaje: 0.07)
     }
 
     def cleanup() {
