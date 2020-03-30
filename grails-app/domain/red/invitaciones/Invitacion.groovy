@@ -48,8 +48,13 @@ class Invitacion {
     def rechazar() {
         aceptada = false
         rechazada = true
-        if (presupuestosHonorarios.size() == CantidadMaximaPresupuestos)
+        if (presupuestosHonorarios.size() >= CantidadMaximaPresupuestos)
             cerrar()
+    }
+
+    def rechazarSinPosibilidadActualizacion() {
+        rechazar()
+        cerrar()
     }
 
     private def cerrar() {
@@ -86,13 +91,15 @@ class Invitacion {
         if (aceptada)
             throw new IllegalStateException("No se puede agregar un presupuesto nuevo si ya se aceptó el anterior.")
 
+        if (cerrada)
+            throw new IllegalStateException("No se puede agregar un presupuesto a una invitación cerrada.")
+
         presupuestosHonorarios.add(honorario)
         rechazada = false
     }
 
     def obtenerPresupuestoHonorarioActual() {
         presupuestosHonorarios.max { it.fechaHoraCreacion }
-
     }
 
 }
