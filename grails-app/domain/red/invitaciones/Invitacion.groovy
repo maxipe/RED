@@ -66,7 +66,7 @@ class Invitacion {
     }
 
     def estaRechazada() {
-        cerrada && !aceptada
+        rechazada
     }
 
     static constraints = {
