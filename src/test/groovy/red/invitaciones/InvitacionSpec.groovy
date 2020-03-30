@@ -21,7 +21,7 @@ class InvitacionSpec extends Specification implements DomainUnitTest<Invitacion>
     void "invitacion lista para aceptar"() {
 
         when:
-        invitacion.presupuestoHonorario = new HonorarioPorCosto(porcentaje: 3.4)
+        invitacion.agregarPresupuestoHonorario(new HonorarioPorCosto(porcentaje: 3.4))
 
         then:
         invitacion.listaParaAceptar()
@@ -43,7 +43,7 @@ class InvitacionSpec extends Specification implements DomainUnitTest<Invitacion>
     void "invitacion aceptada"() {
 
         when:
-        invitacion.presupuestoHonorario = new HonorarioPorCosto(porcentaje: 3.4)
+        invitacion.agregarPresupuestoHonorario(new HonorarioPorCosto(porcentaje: 3.4))
         invitacion.aceptar()
 
         then:
@@ -56,7 +56,7 @@ class InvitacionSpec extends Specification implements DomainUnitTest<Invitacion>
     void "invitacion rechazada"() {
 
         when:
-        invitacion.presupuestoHonorario = new HonorarioPorCosto(porcentaje: 3.4)
+        invitacion.agregarPresupuestoHonorario(new HonorarioPorCosto(porcentaje: 3.4))
         invitacion.rechazar()
 
         then:

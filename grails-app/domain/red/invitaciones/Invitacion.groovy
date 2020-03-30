@@ -9,18 +9,26 @@ import java.time.LocalDateTime
 
 class Invitacion {
 
+    private static final CantidadMaximaPresupuestos = 3
+
     LocalDateTime fechaHoraInvitacion
     DesarrolloInmobiliario desarrolloInmobiliario
     PotencialIntegrante potencialIntegrante
-    Honorario presupuestoHonorario
+    Set<Honorario> presupuestosHonorarios
+
     boolean aceptada
+    boolean rechazada
     boolean cerrada
     LocalDateTime fechaHoraCierre
 
     Invitacion(DesarrolloInmobiliario desarrolloInmobiliario, Persona personaInvitada, RolTipo rolTipo) {
         fechaHoraInvitacion = LocalDateTime.now()
         this.desarrolloInmobiliario = desarrolloInmobiliario
-        this.potencialIntegrante = new PotencialIntegrante(personaInvitada, rolTipo)
+        potencialIntegrante = new PotencialIntegrante(personaInvitada, rolTipo)
+        presupuestosHonorarios = new ArrayList<Honorario>()
+        aceptada = false
+        rechazada = false
+        cerrada = false
     }
 
     def mismaPersonaRol(Persona persona, RolTipo rolTipo) {
@@ -28,17 +36,20 @@ class Invitacion {
     }
 
     def listaParaAceptar() {
-        desarrolloInmobiliario && potencialIntegrante && presupuestoHonorario && estaAbierta()
+        desarrolloInmobiliario && potencialIntegrante && presupuestosHonorarios.any() && estaAbierta()
     }
 
     def aceptar() {
         aceptada = true
+        rechazada = false
         cerrar()
     }
 
     def rechazar() {
         aceptada = false
-        cerrar()
+        rechazada = true
+        if (presupuestosHonorarios.size() == CantidadMaximaPresupuestos)
+            cerrar()
     }
 
     private def cerrar() {
@@ -63,12 +74,25 @@ class Invitacion {
         fechaHoraCierre nullable: true
         desarrolloInmobiliario nullable: false
         potencialIntegrante nullable: false
-        presupuestoHonorario nullable: true
     }
 
     static belongsTo = [desarrolloInmobiliario: DesarrolloInmobiliario]
 
-    static mapping = {
-        presupuestoHonorario cascade: 'save-update'
+    static hasMany = {
+        presupuestosHonorarios: Honorario
     }
+
+    def agregarPresupuestoHonorario(Honorario honorario) {
+        if (aceptada)
+            throw new IllegalStateException("No se puede agregar un presupuesto nuevo si ya se aceptó el anterior.")
+
+        presupuestosHonorarios.add(honorario)
+        rechazada = false
+    }
+
+    def obtenerPresupuestoHonorarioActual() {
+        presupuestosHonorarios.max { it.fechaHoraCreacion }
+
+    }
+
 }

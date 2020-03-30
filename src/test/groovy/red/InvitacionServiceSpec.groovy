@@ -20,7 +20,7 @@ class InvitacionServiceSpec extends Specification
     def setup() {
         desarrolloInmobiliario = new DesarrolloInmobiliario()
         invitacion = new Invitacion(desarrolloInmobiliario, new Persona(nombre: "Juan", apellido: "Perez", dni: "36321123"), rolTipo)
-        invitacion.presupuestoHonorario = new HonorarioPorCosto(porcentaje: 4.5)
+        invitacion.agregarPresupuestoHonorario(new HonorarioPorCosto(porcentaje: 4.5))
         invitacion.save(flush: true)
     }
 

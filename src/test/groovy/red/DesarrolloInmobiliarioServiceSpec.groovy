@@ -88,7 +88,7 @@ class DesarrolloInmobiliarioServiceSpec extends Specification
         Invitacion invitacion = DesarrolloInmobiliario.get(1).invitaciones.first()
 
         then:
-        invitacion.presupuestoHonorario == honorarioPorSuperficie
+        invitacion.obtenerPresupuestoHonorarioActual() == honorarioPorSuperficie
     }
 
 }

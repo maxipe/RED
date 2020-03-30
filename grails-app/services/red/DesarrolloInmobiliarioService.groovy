@@ -40,7 +40,7 @@ class DesarrolloInmobiliarioService {
 
         Invitacion invitacion = desarrolloInmobiliario.invitaciones.find { i -> i.id == invitacionId }
 
-        invitacion.presupuestoHonorario =  honorario
+        invitacion.agregarPresupuestoHonorario(honorario)
     }
 
 }
